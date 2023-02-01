@@ -1,0 +1,15 @@
+{% extends 'base.html' %}
+
+{% block body %}
+    <div class="add_new_subject">
+        <form method = "POST">
+            {% for data in form %}
+                <p><b>{{data.label}}:</b>
+                {{data}}</p>
+            {% endfor %}
+            <input type="submit" value="Create new subject">
+            {% csrf_token %}
+        </form>
+    </div>
+    
+{% endblock %}

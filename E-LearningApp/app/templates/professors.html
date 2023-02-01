@@ -1,0 +1,28 @@
+{% extends 'base.html' %}
+
+{% block body %}
+<div class="professors__title">
+    <h1>Professor list:</h1>
+</div>
+<div class="professors__error">
+    {% for message in messages %}
+        {{message}}
+    {% endfor %}
+</div>
+<div class="professors">
+    <div class="professors__add_new_professor">
+        <a href="add_new_professor/">Add a new professor</a>
+    </div>
+    
+    {% for professor in professors %}
+        <p><b>Name:</b> {{professor.first_name}} {{professor.last_name}}</p>
+        <p><b>Username:</b> {{professor.username}}</p>
+        <p><b>Email:</b> {{professor.email}}</p>
+        <div class="professors__buttons">
+            <a href="edit/{{professor.id}}">Edit professor</a>
+            <a href="view_subject_professor/{{professor.id}}">Add subject to professor</a>
+        </div>
+        <hr>
+    {% endfor %}
+</div>
+{% endblock %}

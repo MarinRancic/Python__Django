@@ -1,0 +1,37 @@
+{% extends 'base.html' %}
+{% block body %}
+    <h1>Dobrodosli {{request.user.username}} !</h1>
+    {{request.user.role}}
+    {{request.user.first_name}}
+    
+    {% if request.user.role == "stu" %}
+    <div class="students">
+    
+    <h1>Subjects enrolled:</h1>
+      <div class="students__buttons">
+        <a href="/view_subjects/">Add new subject</a>
+      </div>
+      <br><br>
+      {% for message in messages %}
+        {{message}}
+      {% endfor %}
+
+      {% for subject in subjects %}
+        <p><b>Naziv:</b> {{subject.predmet.name}} ({{subject.predmet.kod}})</p>
+        <p><b>ECTS:</b> {{subject.predmet.ects}}</p>
+        {% if subject.student.status == 'red' %}
+            <p><b>Redovni semestar:</b> {{subject.predmet.sem_red}}</p>
+        {% else %}
+            <p><b>Izvanredni semestar:</b> {{subject.predmet.sem_izv}}</p>
+        {% endif %}
+        <p><b>Izborni:</b> {{subject.predmet.izborni}}</p>
+        <!-- <p><b>Status:</b> {{subject.status}}</p> -->
+        <div class="subjects__buttons">
+            <a href="/remove_subject/{{subject.id}}">Remove subject</a>
+        </div>
+        <hr>
+      {% endfor %}
+
+    </div>
+    {% endif %}
+{% endblock %}

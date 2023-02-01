@@ -1,0 +1,29 @@
+{% extends 'base.html' %}
+
+{% block body %}
+<div class="students__title">
+    <h1>Student list:</h1>
+</div>
+<div class="students__error">
+    {% for message in messages %}
+        {{message}}
+    {% endfor %}
+</div>
+<div class="students">
+    <div class="students__add_new_student">
+        <a href="add_new_student/">Add a new student</a>
+    </div>
+    
+    {% for student in students %}
+        <p><b>Name:</b> {{student.first_name}} {{student.last_name}}</p>
+        <p><b>Username:</b> {{student.username}}</p>
+        <p><b>Email:</b> {{student.email}}</p>
+        <div class="students__buttons">
+            <a href="edit/{{student.id}}">Edit student</a>
+            <a href="subjects_enroll/{{student.id}}">Enroll subjects</a> 
+            <a href="enrollment_form/{{student.id}}">View enrollment form</a> 
+        </div>
+        <hr>
+    {% endfor %}
+</div>
+{% endblock %}

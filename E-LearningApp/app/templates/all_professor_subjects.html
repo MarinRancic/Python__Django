@@ -1,0 +1,21 @@
+{% extends 'base.html' %}
+
+{% block body %}
+<div class="subjects">
+
+    {% for subject in subjects %}
+        <p><b>Naziv:</b> {{subject.name}} ({{subject.kod}})</p>
+        <p><b>ECTS:</b> {{subject.ects}}</p>
+        {% if subject.student.status == 'red' %}
+            <p><b>Redovni semestar:</b> {{subject.sem_red}}</p>
+        {% else %}
+            <p><b>Izvanredni semestar:</b> {{subject.sem_izv}}</p>
+        {% endif %}
+        <p><b>Izborni:</b> {{subject.izborni}}</p>
+        <div class="students__buttons">
+            <a href="student_list/{{subject.id}}">View enrolled students</a>
+        </div>
+        <hr>
+    {% endfor %}
+</div>
+{% endblock %}

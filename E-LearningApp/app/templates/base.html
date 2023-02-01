@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    {% load static %}
+    <link rel = "stylesheet" href = "{% static 'styles.css' %}">
+</head>
+<body>
+    <div class="header">
+        <a href="/home/" class="logo"><img src="{% static 'images/SOSS_logo.jpg' %}" width:"120" height="120"></a>
+        <div class="header-right">
+          {% if request.user.is_superuser %}
+            <a href="/subjects/">Subjects</a>
+            <a href="/students/">Students</a>
+            <a href="/professors/">Professors</a>
+          {% elif request.user.role == 'prof' %}
+            <a href="/subjects/{{request.user.id}}">Subjects</a>
+          {% endif %}
+          <a href="{% url 'logout' %}">Logout</a>
+        </div>
+      </div>
+
+      {% block body %}
+      {% endblock %}
+
+    
+    
+</body>
+</html>

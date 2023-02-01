@@ -1,0 +1,23 @@
+{% extends 'base.html' %}
+
+{% block body %}
+    <div class="add_new_subject">
+        <h1 style="color:red">ARE YOU SURE THAT YOU WANT TO REMOVE THIS SUBJECT FROM ENROLLMENT FORM:</h1>
+        <p><b>Naziv:</b> {{subject.predmet.name}} ({{subject.predmet.kod}})</p>
+        <p><b>ECTS:</b> {{subject.predmet.ects}}</p>
+        {% if subject.student.status == 'red' %}
+            <p><b>Redovni semestar:</b> {{subject.predmet.sem_red}}</p>
+        {% else %}
+            <p><b>Izvanredni semestar:</b> {{subject.predmet.sem_izv}}</p>
+        {% endif %}
+        <p><b>Izborni:</b> {{subject.predmet.izborni}}</p>
+        <form action= "{% url 'delete_subject_enrollment_form' id_sub id_stu %}" method = "POST">
+            <input type="submit" name="yes" value="YES">
+            <input type="submit" name="no" value="NO">
+            {% csrf_token %}
+        </form>
+    </div>
+    
+{% endblock %}
+
+DODAT ID USERA DA SE MOZE VRATIT NAZAD

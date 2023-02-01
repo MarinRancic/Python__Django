@@ -1,0 +1,13 @@
+{% extends 'base.html' %}
+
+{% block body %}
+
+<div class="students">
+    {% for student in students %}
+        <p><b>Ime:</b> {{student.student.first_name}} {{student.student.last_name}}</p>
+        <p><b>Username:</b> {{student.student.username}}</p>
+        <p><b>Email:</b> {{student.student.email}}</p>
+        <hr>
+    {% endfor %}
+</div>
+{% endblock %}

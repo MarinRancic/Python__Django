@@ -1,0 +1,18 @@
+{% extends 'base.html' %}
+
+{% block body %}
+    <div class="add_new_subject">
+        <h1 style="color:red">ARE YOU SURE THAT YOU WANT TO DELETE THIS SUBJECT:</h1>
+        <p><b>Naziv:</b> {{subject.name}} ({{subject.kod}})</p>
+        <p><b>ECTS:</b> {{subject.ects}}</p>
+        <p><b>Redovni semestar:</b> {{subject.sem_red}}</p>
+        <p><b>Izvanredni semestar:</b> {{subject.sem_izv}}</p>
+        <p><b>Izborni:</b> {{subject.izborni}}</p>
+        <form action= "{% url 'delete_subject' id %}" method = "POST">
+            <input type="submit" name="yes" value="YES">
+            <input type="submit" name="no" value="NO">
+            {% csrf_token %}
+        </form>
+    </div>
+    
+{% endblock %}

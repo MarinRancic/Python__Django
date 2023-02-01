@@ -1,0 +1,15 @@
+{% extends 'base.html' %}
+
+{% block body %}
+    <div class="edit_professor">
+        <form method = "POST">
+            {% for data in form %}
+                <p><b>{{data.label}}:</b>
+                {{data}}</p>
+            {% endfor %}
+            <input type="submit" value="Edit professor">
+            {% csrf_token %}
+        </form>
+    </div>
+    
+{% endblock %}

@@ -1,0 +1,32 @@
+{% extends 'base.html' %}
+
+{% block body %}
+<div class="subjects__title">
+    <h1>Subject list:</h1>
+</div>
+<div class="subjects__error">
+    {% for message in messages %}
+        {{message}}
+    {% endfor %}
+</div>
+<div class="subjects">
+    <div class="subjects__add_new_subject">
+        <a href="add_new_subject/">Add a new subject</a>
+    </div>
+    
+    {% for subject in subjects %}
+        <p><b>Naziv:</b> {{subject.name}} ({{subject.kod}})</p>
+        <p><b>ECTS:</b> {{subject.ects}}</p>
+        <p><b>Redovni semestar:</b> {{subject.sem_red}}</p>
+        <p><b>Izvanredni semestar:</b> {{subject.sem_izv}}</p>
+        <p><b>Izborni:</b> {{subject.izborni}}</p>
+        <div class="subjects__buttons">
+            <a href="edit/{{subject.id}}">Edit subject</a> 
+            <a href="confirm_delete/{{subject.id}}">Delete subject</a>
+            <a href="students_enrolled/{{subject.id}}">Students enrolled</a>
+        </div>
+        
+        <hr>
+    {% endfor %}
+</div>
+{% endblock %}

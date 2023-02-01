@@ -1,0 +1,37 @@
+{% extends 'base.html' %}
+
+{% block body %}
+
+<div class="students">
+
+    <form method = "get">
+        <label>Display students:</label>
+        <select name="student" id="student">
+          <option value="">Enrolled</option>
+          <option value="polozen">Passed</option>
+          <option value="izgubio potpis">Failed</option>
+        </select>
+        <input type="submit" value="Filter">
+      </form>
+      <br><br>
+
+    {% for student in students %}
+        <p><b>Ime:</b> {{student.student.first_name}} {{student.student.last_name}}</p>
+        <p><b>Username:</b> {{student.student.username}}</p>
+        <p><b>Email:</b> {{student.student.email}}</p>
+        <p><b>Status:</b> {{student.status}}</p>
+        <p><b>CHANGE TO:</b></p>
+        <div class="students__buttons">
+            {% if student.status == "" %}
+                <a href="toggle_status/passed/sub{{id_sub}}/stu{{student.student.id}}">POLOZEN</a>
+                <a href="toggle_status/failed/sub{{id_sub}}/stu{{student.student.id}}">IZGUBIO POTPIS</a>
+            {% elif student.status == "polozen" %}
+                <a href="toggle_status/failed/sub{{id_sub}}/stu{{student.student.id}}">IZGUBIO POTPIS</a>
+            {% elif student.status == "izgubio potpis" %}
+                <a href="toggle_status/passed/sub{{id_sub}}/stu{{student.student.id}}">POLOZEN</a>
+            {% endif %}
+        </div>
+        <hr>
+    {% endfor %}
+</div>
+{% endblock %}

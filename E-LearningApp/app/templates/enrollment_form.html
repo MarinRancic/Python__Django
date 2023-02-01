@@ -1,0 +1,30 @@
+{% extends 'base.html' %}
+
+{% block body %}
+<div class="subjects">
+    <div class="professors__error">
+        {% for message in messages %}
+            {{message}}
+        {% endfor %}
+    </div>
+    <h1><b>Ime studenta:
+
+        {{subjects.student.first_name}} ({{subjects.student.status}})
+        {{subjects}}
+    </b></h1>
+    {% for subject in subjects %}
+        <p><b>Naziv:</b> {{subject.predmet.name}} ({{subject.predmet.kod}})</p>
+        <p><b>ECTS:</b> {{subject.predmet.ects}}</p>
+        {% if subject.student.status == 'red' %}
+            <p><b>Redovni semestar:</b> {{subject.predmet.sem_red}}</p>
+        {% else %}
+            <p><b>Izvanredni semestar:</b> {{subject.predmet.sem_izv}}</p>
+        {% endif %}
+        <p><b>Izborni:</b> {{subject.predmet.izborni}}</p>
+        <div class="subjects__buttons">
+            <a href="confirm_delete/sub{{subject.predmet.id}}/stu{{id_stu}}">Remove subject</a>
+        </div>
+        <hr>
+    {% endfor %}
+</div>
+{% endblock %}
